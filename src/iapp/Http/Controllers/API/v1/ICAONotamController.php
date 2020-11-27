@@ -9,8 +9,6 @@ use iLaravel\Core\iApp\Http\Controllers\API\Methods\Controller\Show;
 
 class ICAONotamController extends Controller
 {
-    public $icao = null;
-
     use Index,
         Show,
         ICAONotam\Rules,
