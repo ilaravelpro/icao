@@ -13,9 +13,11 @@ trait Request
         return (new self($service, $server, $method, $params))->_request();
     }
 
-    private function _request($params = [])
+    public function _request($params = [])
     {
         $params = count($params) > 0 ? array_merge($this->params, $params) : $this->params;
+        if (($country = array_search($params['searchText'],icao('countries'))) !== false)
+            $params['searchText'] = $country;
         $params['f'] = "json";
         unset($params['page']);
         unset($params['per_page']);
@@ -43,8 +45,8 @@ trait Request
         if (isset($result->error))
             throw  ValidationException::withMessages(['icao' => $result->error->details]);
         $icao_request['params'] = $paramsFilter;
-        $icao_request['response'] = $result->results;
-        $this->model::create($icao_request);
-        return $result->results;
+        $icao_request['response'] = array_column($result->results, 'attributes');
+        if ($this->save)$this->model::create($icao_request);
+        return $icao_request['response'];
     }
 }

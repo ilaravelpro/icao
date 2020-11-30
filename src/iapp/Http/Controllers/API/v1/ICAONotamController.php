@@ -13,6 +13,7 @@ class ICAONotamController extends Controller
         Show,
         ICAONotam\Rules,
         ICAONotam\RequestData,
+        ICAONotam\FilterWithSTED,
         ICAONotam\Filters,
         ICAONotam\SearchQ;
 }

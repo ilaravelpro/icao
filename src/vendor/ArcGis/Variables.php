@@ -8,6 +8,7 @@ trait Variables
     public $service = "WORLDROUTE";
     public $server = "MapServer";
     public $method = "find";
+    public $save = true;
 
     public $model = "ICAORequest";
 

@@ -50,6 +50,7 @@ trait Filters
             $model->where('location', strtoupper($request->icao));
             $current['icao'] = strtoupper($request->icao);
         }
+        $this->filterWithSTED($request, $model, $parent, $filters, $operators);
         return [$filters, $current, $operators];
     }
 }
