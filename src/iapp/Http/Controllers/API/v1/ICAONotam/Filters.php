@@ -6,9 +6,10 @@ namespace iLaravel\ICAO\iApp\Http\Controllers\API\v1\ICAONotam;
 
 trait Filters
 {
+    public $statusFilter = false;
+
     public function filters($request, $model, $parent = null, $operators = [])
     {
-        $current = [];
         $filters = [
             [
                 'name' => 'all',
@@ -41,16 +42,7 @@ trait Filters
                 'type' => 'text'
             ],
         ];
-        $this->requestFilter($request, $model, $parent, $filters, $operators);
-        if ($request->q) {
-            $this->searchQ($request, $model, $parent);
-            $current['q'] = $request->q;
-        }
-        if ($request->icao) {
-            $model->where('location', strtoupper($request->icao));
-            $current['icao'] = strtoupper($request->icao);
-        }
         $this->filterWithSTED($request, $model, $parent, $filters, $operators);
-        return [$filters, $current, $operators];
+        return [$filters, [], $operators];
     }
 }

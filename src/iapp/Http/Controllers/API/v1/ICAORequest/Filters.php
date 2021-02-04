@@ -8,9 +8,6 @@ trait Filters
 {
     public function filters($request, $model, $parent = null, $operators = [])
     {
-        $user = auth()->user();
-        $filters = [];
-        $current = [];
         $filters = [
             [
                 'name' => 'all',
@@ -33,11 +30,6 @@ trait Filters
                 'type' => 'text'
             ],
         ];
-        $this->requestFilter($request, $model, $parent, $filters, $operators);
-        if ($request->q) {
-            $this->searchQ($request, $model, $parent);
-            $current['q'] = $request->q;
-        }
-        return [$filters, $current, $operators];
+        return [$filters, [], $operators];
     }
 }

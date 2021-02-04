@@ -15,7 +15,7 @@ trait Request
 
     private function _request()
     {
-        $get = $this->model::where('location', $this->location)->where('end_at', '<', Carbon::now()->addYears(10)->format('Y-m-d H:i:s'))->get();
+        $get = $this->model::where('location', $this->location)->where('created_at', '>', Carbon::now()->subMonth()->format('Y-m-d H:i:s'))->get();
         if ($get->count() >= 5)
             return $get;
         try {

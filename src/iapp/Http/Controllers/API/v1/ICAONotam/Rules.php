@@ -10,6 +10,10 @@ trait Rules
     {
         $rules = [];
         switch ($action) {
+            case "data":
+            case "index":
+                $rules = ['icao' => "nullable|string"];
+                break;
             case 'update':
                 $rules = [
                     'key' => "required|string",
@@ -17,9 +21,9 @@ trait Rules
                     'subject' => "required|string",
                     'modifier' => "required|string",
                     'status' => "required|string",
-                    'message' => "required",
-                    'start_at' => "required",
-                    'end_at' => "required",
+                    'message' => "required|string",
+                    'start_at' => "required|string",
+                    'end_at' => "required|string",
                 ];
                 break;
         }
