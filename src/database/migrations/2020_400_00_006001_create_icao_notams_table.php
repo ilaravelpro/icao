@@ -1,4 +1,9 @@
 <?php
+/**
+ * Author: Amir Hossein Jahani | iAmir.net
+ * Last modified: 2/4/21, 11:14 PM
+ * Copyright (c) 2021. Powered by iamir.net
+ */
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
