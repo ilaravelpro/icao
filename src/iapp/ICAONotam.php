@@ -25,6 +25,21 @@ class ICAONotam extends Model
         'end_at' => 'datetime',
     ];
 
+    public $datetime = [
+        'start_at' => 'Y-m-d H:i',
+        'end_at' => 'Y-m-d H:i',
+    ];
+
+    public function getStartAtAttribute($value)
+    {
+        return format_datetime($value, $this->datetime, 'start_at');
+    }
+
+    public function getEndAtAttribute($value)
+    {
+        return format_datetime($value, $this->datetime, 'end_at');
+    }
+
     public static function getByICAO($icao)
     {
         return static::where('location', $icao)->get();

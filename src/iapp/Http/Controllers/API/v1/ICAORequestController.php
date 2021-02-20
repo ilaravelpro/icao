@@ -19,6 +19,5 @@ class ICAORequestController extends Controller
         ICAORequest\Store,
         ICAORequest\Rules,
         ICAORequest\RequestData,
-        ICAORequest\Filters,
-        ICAORequest\SearchQ;
+        ICAORequest\Filters;
 }

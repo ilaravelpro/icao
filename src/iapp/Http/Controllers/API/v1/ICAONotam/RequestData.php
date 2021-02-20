@@ -15,11 +15,7 @@ trait RequestData
     public function requestData(Request $request, $action, &$data)
     {
         if (in_array($action, ['index']) && isset($request->icao)){
-            Notams::request(strtoupper($request->icao));
-            $this->model::where('location', $request->icao)->where('end_at', '<',\Carbon\Carbon::now()->subHours(3)->format('Y-m-d H:i:s'))
-                ->each(function ($record) {
-                    $record->delete();
-                });
+
         }
     }
 }

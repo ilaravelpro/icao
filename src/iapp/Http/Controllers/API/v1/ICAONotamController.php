@@ -20,5 +20,5 @@ class ICAONotamController extends Controller
         ICAONotam\RequestData,
         ICAONotam\FilterWithSTED,
         ICAONotam\Filters,
-        ICAONotam\SearchQ;
+        ICAONotam\QueryFilterType;
 }
