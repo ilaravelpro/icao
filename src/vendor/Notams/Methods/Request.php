@@ -41,23 +41,24 @@ trait Request
         }
         $result = json_decode($content);
         $records = [];
-        foreach ($result as $index => $item) {
-            $record = $this->model::where('location', $this->location)->where('key', $item->id)->first();
-            if (!$record){
-                $record['key'] = $item->id;
-                $record['location'] = $item->location;
-                $record['subject'] = $item->Subject;
-                $record['modifier'] = $item->Modifier;
-                $record['status'] = $item->status;
-                $record['message'] = $item->message;
-                $record['start_at'] = Carbon::parse($item->startdate)->format('Y-m-d H:i:s');
-                $record['end_at'] = Carbon::parse($item->enddate)->format('Y-m-d H:i:s');
-                $record = new $this->model($record);
-                $record->save();
+        if (is_array($result))
+            foreach ($result as $index => $item) {
+                $record = $this->model::where('location', $this->location)->where('key', $item->id)->first();
+                if (!$record){
+                    $record['key'] = $item->id;
+                    $record['location'] = $item->location;
+                    $record['subject'] = $item->Subject;
+                    $record['modifier'] = $item->Modifier;
+                    $record['status'] = $item->status;
+                    $record['message'] = $item->message;
+                    $record['start_at'] = Carbon::parse($item->startdate)->format('Y-m-d H:i:s');
+                    $record['end_at'] = Carbon::parse($item->enddate)->format('Y-m-d H:i:s');
+                    $record = new $this->model($record);
+                    $record->save();
+                }
+                $records[] = $record;
+                unset($record);
             }
-            $records[] = $record;
-            unset($record);
-        }
         return $records;
     }
 }
